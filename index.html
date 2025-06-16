@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bobina de Tesla</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    
+    <style>
+        body {
+            background-attachment: fixed;
+            background-size: cover;
+
+            font-family:'Poppins', sans-serif;
+            background-image: url('fondo-encabezado.png');
+            /*background: url('https://www.transparenttextures.com/patterns/paper-fibers.png');*/
+            background-color: #f5f0e6;
+            color: #3d2b1f;
+            margin: 0;
+            padding: 0;
+        }
+        body::before {
+        content: "";
+        position: fixed; 
+        top: 0; left: 0; right: 0; bottom: 0;
+        background-color: rgba(245, 240, 230, 0.7); 
+        pointer-events: none; 
+        z-index: 0;
+        }
+        body > * {
+        position: relative;
+        z-index: 1;
+        }
+        header {
+            background-image: url('fondo-encabezado.png');
+            color: #fffaf0;
+            padding: 30px;
+            text-align: center;
+            border-bottom: 4px solid #a67c52;
+        }
+        header h1 {
+            font-family:'Poppins', sans-serif;
+            font-size: 3em;
+            margin: 0;
+            letter-spacing: 2px;
+        }
+        nav {
+            font-family:'Poppins', sans-serif;
+            background-color: #a67c52;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            padding: 10px 0;
+            border-bottom: 3px solid #8d6e4d;
+        }
+        nav a {
+            color: #fffaf0;
+            text-decoration: none;
+            font-size: 1.2em;
+            font-family:'Poppins', sans-serif;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #f2e6ce;
+        }
+        main {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        section {
+            /*border: 2px dashed #a67c52;*/
+            background: linear-gradient(to bottom right, #fffaf3, #f7e8d5);
+            padding: 30px;
+            margin-bottom: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeIn 1s ease forwards;
+        }
+        section h2 {
+            
+            font-size: 2em;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #a67c52;
+            padding-bottom: 5px;
+        }
+        p, li {
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        .imagen-bobina {
+            max-width: 100%;
+            border: 6px double #a67c52;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+        button {
+            background-color: #6b4c3b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-family: 'Georgia', serif;
+        }
+        button:hover {
+            background-color: #8d6e4d;
+        }
+        button {
+            font-family: 'Poppins', sans-serif;
+        }
+        input[type="text"] {
+            padding: 8px;
+            font-size: 1em;
+            margin-right: 10px;
+            border: 1px solid #a67c52;
+            border-radius: 5px;
+        }
+        footer {
+            background-color: #6b4c3b;
+            color: #fffaf0;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9em;
+            border-top: 4px solid #a67c52;
+        }
+        .quiz-texto {
+            text-align: center
+        }
+        .contenido-historia {
+        display: flex;
+        align-items: justify; 
+        gap: 10px; /* Espacio entre imagen y texto */
+        }
+
+        .imagen-tesla {
+            width: 320px; 
+            height: auto;
+        }
+
+        @keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+section {
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards;
+    animation-delay: 0.2s;
+}
+.carrete {
+  display: flex;
+  overflow-x: auto;
+  gap: 20px;
+  scroll-snap-type: x mandatory;
+  padding: 10px 0;
+  scrollbar-width: none; 
+}
+
+.carrete::-webkit-scrollbar {
+  display: none;
+}
+
+.carrete img {
+  flex: 0 0 auto;
+  width: 280px;
+  height: auto;
+  border-radius: 12px;
+  border: 4px solid #a67c52;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  scroll-snap-align: center;
+  transition: transform 0.3s ease;
+}
+
+.carrete img:hover {
+  transform: scale(1.05);
+}
+video {
+display: block;
+width: 100%;
+height: auto;
+object-fit: cover;
+}
+.titulo-principal {
+  font-size: 3.5em;
+  animation: glow 2s infinite alternate;
+}
+@keyframes glow {
+  from { text-shadow: 0 0 5px #fff, 0 0 10px #a67c52; }
+  to   { text-shadow: 0 0 20px #fff, 0 0 40px #ff8c00; }
+}
+
+
+    </style>
+</head>
+<body>
+    <header>
+    <video autoplay muted loop playsinline style="position:absolute; width:100%; height:100%; object-fit:cover; z-index:-1;">
+        <source src="fondo-encabezado.png" type="video/mp4">
+    </video>
+    <div style="position:relative; top:40%; text-align:center; color:white;">
+        <h1 class="titulo-principal">Bobina de Tesla</h1>
+        <p>Electricidad sin cables.</p>
+    </div>
+    </header>
+
+    <nav>
+        <a href="#historia">Historia</a>
+        <a href="#descripcion">Bobina</a>
+        <a href="#funcion">Funcion</a>
+        <a href="#aplicaciones">Aplicaciones</a>
+        <a href="#imagen">Juego 1</a>
+        <a href="#quiz">Quiz</a>
+    </nav>
+
+    <main>
+        <section id="historia">
+        <h2>Un Invento Histórico</h2>
+        <div class="contenido-historia">
+        <p>La bobina de Tesla es un dispositivo inventado por Nikola Tesla en 1890 que genera altas tensiones y campos eléctricos, capaces de producir espectaculares descargas eléctricas visibles.
+        <br><br>Función:
+        Crear un sistema de transmisión de energía a largas distancias sin cables
+        Ionizar el aire o gas </p>
+        <div>
+        <img class="imagen-tesla" src="imagen-tesla.png" alt="">
+        </section>
+
+        <section id="galeria">
+        <div style="position: relative;">
+            <div class="carrete" id="carreteTesla">
+            <img src="imagen-uno.jpg" alt="Tesla 1">
+            <img src="imagen-dos.jpeg" alt="Tesla 2">
+            <img src="imagen-tres.jpg" alt="Tesla 3">
+            <img src="imagen-cuatro.jpg" alt="Tesla 4">
+            </div>
+        </div>
+        </section>
+
+        <section id="descripcion">
+            <h2>Bobina de Tesla</h2>
+            <p>Es un dispositivo eléctrico que genera descargas de alto voltaje mediante la resonancia. Produce arcos eléctricos visibles, sin necesidad de cables, y funciona con corriente alterna de alta frecuencia.</p>
+            <h1>Partes Principales</h1>
+            <ul>
+            <li>Fuente de alimentación</li>
+            <li>Bobina primaria</li>
+            <li>Condensador</li>
+            <li>Bobina secundaria</li>
+            <li>Terminar Superior</li>
+            </ul>
+        </section>
+
+        <section id="funcion">
+            <h2>Cómo Funciona</h2>
+            <p>Descripción breve..</p>
+            <h1>Funcionamiento por pasos</h1>
+            <ol>
+            <li>Fuente de alimentación</li>
+            <li>Bobina primaria</li>
+            <li>Condensador</li>
+            <li>Bobina secundaria</li>
+            <li>Terminar Superior</li>
+            </ol>
+            <h1>Diagrama</h1>
+            <img class="imagen-bobina" src="diagrama-bobina.png" alt="imagen-bobina">
+        </section>
+
+
+
+        <section id="aplicaciones">
+            <h2>Aplicaciones y Usos</h2>
+            <h1>Historicos</h1>
+            <ul>
+                <li>Demostraciones científicas y educativas</li>
+                <li>Espectáculos de electricidad</li>
+                <li>Inspiración para nuevas tecnologías</li>
+                <li>Estudios avanzados de campos eléctricos</li>
+            </ul>
+            <h1>Actuales</h1>
+            <ul>
+                <li>Demostraciones científicas y educativas</li>
+                <li>Espectáculos de electricidad</li>
+                <li>Inspiración para nuevas tecnologías</li>
+                <li>Estudios avanzados de campos eléctricos</li>
+            </ul>
+        </section>
+
+        <section id="imagen">
+            <h2>Imagen de la Bobina</h2>
+            <img class="imagen-bobina" src="video-bobina.mp4" alt="imagen-bobina">
+            <p style="text-align: center; font-size: 0.9em; margin-top: 5px;">Nikola Tesla en su laboratorio de Colorado Springs (1900)</p>
+            <video autoplay muted loop playsinline>
+            <source src="video-bobina.mp4" type="video/mp4">
+        </video>
+        </section>
+
+        <section id="quiz" style="text-align: center;">
+        <h2>¿Listo para poner a prueba tu conocimiento?</h2>
+        <p>Haz clic para comenzar el quiz sobre Tesla y su bobina</p>
+        <a href="quiz.html" target="_blank">
+            <button>¡Comenzar Quiz!</button>
+        </a>
+        </section>
+
+        
+    </main>
+
+    <footer>
+        &copy; 2025 Proyecto Bobina de Tesla | Creado por nuestro Team
+    </footer>
+
+    <script>
+    //desplazamiento
+    $(document).ready(function () {
+        $('nav a[href^="#"]').on('click', function (e) {
+            e.preventDefault(); // evita el salto automático
+            var target = $(this.getAttribute('href'));
+
+            if (target.length) {
+                $('html, body').animate({
+                    scrollTop: target.offset().top - 70 
+                }, 800); // duración de la animación en milisegundos
+            }
+        });
+    });
+    //carrete de imagenes
+$("#galeria img").on("click", function(){
+    $(this).animate({width: "320px"}, 200)
+           .siblings().animate({width: "250px"}, 200);
+});
+
+    </script>
+</body>
+
+</html>
