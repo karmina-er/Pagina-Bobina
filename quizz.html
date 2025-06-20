@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quiz: La Bobina de Tesla</title>
+  <style>
+    body {
+      font-family: 'Courier New', monospace;
+      margin: 0;
+      padding: 0;
+      background: url('fondo.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
+    }
+
+    .quiz-container {
+      max-width: 750px;
+      margin: 125px auto;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 30px;
+      border-radius: 12px;
+      border: 2px solid #999;
+      box-shadow: 0 0 20px #aaa;
+    }
+
+    h1 {
+      text-align: center;
+      color: #0e005a;
+      font-family: 'Courier New', monospace;
+      font-size: 28px;
+    }
+
+    .question {
+      font-size: 18px;
+      margin: 20px 0 10px;
+      color: #0b096d;
+    }
+
+    .options button {
+      display: block;
+      width: 100%;
+      margin: 8px 0;
+      padding: 10px;
+      background: #e6eaff;
+      color: #14005a;
+      border: 1px solid #7e6fbf;
+      border-radius: 5px;
+      font-family: 'Courier New', monospace;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .options button:hover {
+      background: #b0eef0;
+    }
+
+    .options button.correct {
+      background-color: #65bdcc;
+      color: #000;
+    }
+
+    .options button.wrong {
+      background-color: #ef5350;
+      color: #000;
+    }
+
+    #score {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 20px;
+      color: #444444;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<div class="quiz-container">
+  <h1>⚡ Quiz: La Bobina de Tesla ⚡</h1>
+  <div id="quiz"></div>
+  <div id="score"></div>
+</div>
+
+<script>
+  const quizData = [
+    {
+      question: "1.-¿Quién inventó la bobina de Tesla?",
+      options: ["Thomas Edison", "Nikola Tesla", "James Watt", "Michael Faraday"],
+      correct: 1
+    },
+    {
+      question: "2.-¿Cuál es el principal uso de la bobina de Tesla?",
+      options: ["Generar luz solar", "Transmitir energía inalámbrica", "Crear música", "Encender motores diésel"],
+      correct: 1
+    },
+    {
+      question: "3.-¿Qué tipo de corriente utiliza la bobina de Tesla?",
+      options: ["Corriente continua", "Corriente alterna", "Corriente híbrida", "Corriente estática"],
+      correct: 1
+    },
+    {
+      question: "4.-¿Qué fenómeno eléctrico puede generar una bobina de Tesla?",
+      options: ["Arcos eléctricos", "Ondas de sonido", "Fuerza magnética", "Fotones"],
+      correct: 0
+    },
+    {
+      question: "5.-¿En qué siglo fue inventada?",
+      options: ["Siglo XVIII", "Siglo XIX", "Siglo XX", "Siglo XXI"],
+      correct: 1
+    },
+    {
+      question: "6.-¿En qué año aproximadamente se creó la bobina de Tesla?",
+      options: ["1880", "1891", "1920", "1875"],
+      correct: 1
+    },
+    {
+      question: "7.-¿Qué elemento es crucial para el funcionamiento de la bobina?",
+      options: ["Motor", "Transformador", "Resistencia", "Panel solar"],
+      correct: 1
+    },
+    {
+      question: "8.-¿Qué tipo de campo produce la bobina de Tesla?",
+      options: ["Campo gravitacional", "Campo eléctrico de baja frecuencia", "Campo electromagnético", "Campo térmico"],
+      correct: 2
+    },
+    {
+      question: "9.-¿Cuál es un uso moderno de la tecnología de Tesla?",
+      options: ["Comunicación submarina", "Coches a gasolina", "Tecnología de radio y televisión", "Relojes de sol"],
+      correct: 2
+    },
+    {
+      question: "10.-¿Cómo se llama el fenómeno que hace saltar la chispa en una bobina de Tesla?",
+      options: ["Efecto Doppler", "Descarga de corona", "Inducción térmica", "Condensación"],
+      correct: 1
+    }
+  ];
+
+  const quizContainer = document.getElementById("quiz");
+  const scoreDisplay = document.getElementById("score");
+
+  let score = 0;
+  let current = 0;
+
+  function loadQuestion() {
+    if (current >= quizData.length) {
+      scoreDisplay.innerText = `¡Puntaje final: ${score}/${quizData.length}!`;
+      return;
+    }
+
+    const q = quizData[current];
+    quizContainer.innerHTML = `
+      <div class="question"><strong>${q.question}</strong></div>
+      <div class="options">
+        ${q.options.map((opt, i) => `<button onclick="checkAnswer(${i})">${opt}</button>`).join("")}
+      </div>
+    `;
+  }
+
+  function checkAnswer(selected) {
+    const q = quizData[current];
+    const buttons = document.querySelectorAll(".options button");
+    buttons.forEach((btn, index) => {
+      if (index === q.correct) {
+        btn.classList.add("correct");
+      } else if (index === selected) {
+        btn.classList.add("wrong");
+      }
+      btn.disabled = true;
+    });
+
+    if (selected === q.correct) {
+      score++;
+    }
+
+    current++;
+    setTimeout(loadQuestion, 1500);
+  }
+
+  loadQuestion();
+</script>
+
+</body>
+</html>
