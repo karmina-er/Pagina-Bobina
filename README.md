@@ -7,12 +7,9 @@
 Este proyecto tiene como objetivo proporcionar información clara y accesible sobre **la bobina**, sus tipos, principios de funcionamiento y su importancia en diversos sistemas eléctricos.
 Ideal para cualquier persona interesada en aprender sobre este componente fundamental.
 
----
-
 ## 🛠 Tecnologías utilizadas
 - HTML5
 - CSS3
-- JavaScript (opcional, si lo usaste)
+- JavaScript (utilizado en el cuestionario)
 
----
 
